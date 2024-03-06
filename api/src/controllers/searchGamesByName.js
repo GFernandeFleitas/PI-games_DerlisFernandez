@@ -1,5 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
+const { Op } = require("sequelize");
+const cleanVideogameDataFromApi = require("../helpers/cleanVideogameDataFromApi.js");
 
 const { API_KEY, ALL_VIDEOGAMES_ENDOPOINT } = process.env;
 
@@ -16,28 +18,8 @@ const searchGamesByName = async (req, res) => {
     if (!response.data.count)
       return res.status(204).json(`Game: "${req.query.name}" NOT FOUND`);
 
-    const gamesFound = response.data.results.map((videogames) => {
-      const {
-        id,
-        name,
-        description,
-        platforms,
-        background_image,
-        rating,
-        released,
-        genres,
-      } = videogames;
-
-      return {
-        id,
-        name,
-        description,
-        platforms,
-        background_image,
-        rating,
-        released,
-        genres: genres.map((genre) => genre.name),
-      };
+    const gamesFound = response.data.results.map((videogame) => {
+      return cleanVideogameDataFromApi(videogame);
     });
 
     const dbVideogames = await Videogame.findAll({

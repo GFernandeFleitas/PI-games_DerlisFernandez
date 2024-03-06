@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
+const cleanVideogameDataFromApi = require("../helpers/cleanVideogameDataFromApi.js");
 
 const { API_KEY, ALL_VIDEOGAMES_ENDOPOINT } = process.env;
 
@@ -18,28 +19,8 @@ const getAllVideogames = async (req, res) => {
     while (pageNumber < 5) {
       pageNumber++;
 
-      response.data.results.map((videogames) => {
-        const {
-          id,
-          name,
-          description,
-          platforms,
-          background_image,
-          rating,
-          released,
-          genres,
-        } = videogames;
-
-        allVideogames.push({
-          id,
-          name,
-          description,
-          platforms,
-          background_image,
-          rating,
-          released,
-          genres: genres.map((genre) => genre.name),
-        });
+      response.data.results.map((videogame) => {
+        allVideogames.push(cleanVideogameDataFromApi(videogame));
       });
 
       response = await axios.get(response.data.next);

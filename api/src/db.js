@@ -46,10 +46,14 @@ const { Videogame, Genre } = sequelize.models;
 
 Videogame.belongsToMany(Genre, {
   through: "videogames_genres",
+  foreignKey: "videogame_id",
+  timestamps: false,
 });
 
 Genre.belongsToMany(Videogame, {
   through: "videogames_genres",
+  foreignKey: "genre_id",
+  timestamps: false,
 });
 
 module.exports = {

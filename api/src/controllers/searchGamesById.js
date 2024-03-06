@@ -1,67 +1,67 @@
 const axios = require("axios");
 require("dotenv").config();
+const cleanVideogameDataFromApi = require("../helpers/cleanVideogameDataFromApi.js");
 
 const { API_KEY, ALL_VIDEOGAMES_ENDOPOINT } = process.env;
 
 const { Videogame, Genre } = require("../db.js");
 
-const searchGamesByName = async (req, res) => {
-  const { name } = req.query;
+const searchGameById = async (req, res) => {
+  const { id } = req.params;
+
   try {
     //get the first response from the API
-    const response = await axios(
-      `${ALL_VIDEOGAMES_ENDOPOINT}?search=${name}&key=${API_KEY}`
-    );
+    let gamesFound = [];
+    let dbVideogames = [];
 
-    if (!response.data.count)
-      return res.status(204).json(`Game: "${req.query.name}" NOT FOUND`);
+    if (id.length < 32) {
+      const response = await axios(
+        `${ALL_VIDEOGAMES_ENDOPOINT}/${id}?key=${API_KEY}`
+      );
 
-    const gamesFound = response.data.results.map((videogames) => {
-      const {
-        id,
-        name,
-        description,
-        platforms,
-        background_image,
-        rating,
-        released,
-        genres,
-      } = videogames;
+      gamesFound = [response.data].map((videogame) => {
+        return cleanVideogameDataFromApi(videogame);
+      });
 
-      return {
-        id,
-        name,
-        description,
-        platforms,
-        background_image,
-        rating,
-        released,
-        genres: genres.map((genre) => genre.name),
-      };
-    });
-
-    const dbVideogames = await Videogame.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
+      if (gamesFound.length) {
+        res.status(200).json(...gamesFound);
+      } else {
+        res.status(404).json({ error: `Game with ID ${id} does not exist` });
+      }
+    } else {
+      dbVideogames = await Videogame.findByPk(id, {
+        include: {
+          model: Genre,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
-      },
-      limit: 15,
-    });
+      });
 
-    const filteredDBgames = dbVideogames.filter((game) => {
-      return game.name.toLowerCase().includes(name.toLowerCase());
-    });
+      console.log(dbVideogames);
 
-    return gamesFound.length && filteredDBgames.length >= 0
-      ? res.status(200).json({
-          apigames: [...gamesFound].slice(0, 15),
-          dbvideogames: [...filteredDBgames].slice(0, 15),
-        })
-      : res.status(404).send("Not Found");
+      if (dbVideogames) {
+        let auxGenres = dbVideogames.genres.map((g) => g.name);
+        const responseObject = {
+          ...dbVideogames.dataValues,
+          genres: auxGenres,
+        };
+      }
+
+      console.log(dbVideogames);
+
+      !dbVideogames
+        ? res.status(404).json({ error: `Game with ID ${id} does not exist` })
+        : res.status(200).json(responseObject);
+    }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (error.response.status === 404) {
+      res.status(404).json({ error: `Game with ID ${id} does not exist` });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
   }
 };
 
-module.exports = searchGamesByName;
+module.exports = searchGameById;
