@@ -40,10 +40,21 @@ const getAllVideogames = async (req, res) => {
 
     const dbVideogames = await Videogame.findAll(query);
 
+    console.log(dbVideogames);
+
+    let responseDbVideogames = [];
+
+    dbVideogames.map((game) => {
+      responseDbVideogames.push({
+        ...game.toJSON(),
+        genres: game.genres.map((g) => g.name),
+      });
+    });
+
     return allVideogames.length && dbVideogames.length >= 0
       ? res
           .status(200)
-          .json({ apigames: allVideogames, dbvideogames: dbVideogames })
+          .json({ apigames: allVideogames, dbvideogames: responseDbVideogames })
       : res.status(404).send("Not Found");
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -14,7 +14,7 @@ const searchGameById = async (req, res) => {
     let gamesFound = [];
     let dbVideogames = [];
 
-    if (id.length < 32) {
+    if (id.length < 10) {
       const response = await axios(
         `${ALL_VIDEOGAMES_ENDOPOINT}/${id}?key=${API_KEY}`
       );
@@ -39,24 +39,23 @@ const searchGameById = async (req, res) => {
         },
       });
 
-      console.log(dbVideogames);
+      let responseObject = {};
 
       if (dbVideogames) {
-        let auxGenres = dbVideogames.genres.map((g) => g.name);
-        const responseObject = {
+        console.log(dbVideogames.dataValues.genres);
+        let auxGenres = dbVideogames.dataValues.genres.map((g) => g.name);
+        responseObject = {
           ...dbVideogames.dataValues,
           genres: auxGenres,
         };
       }
-
-      console.log(dbVideogames);
 
       !dbVideogames
         ? res.status(404).json({ error: `Game with ID ${id} does not exist` })
         : res.status(200).json(responseObject);
     }
   } catch (error) {
-    if (error.response.status === 404) {
+    if (error.hasOwnProperty("response")) {
       res.status(404).json({ error: `Game with ID ${id} does not exist` });
     } else {
       res.status(500).json({ error: error.message });

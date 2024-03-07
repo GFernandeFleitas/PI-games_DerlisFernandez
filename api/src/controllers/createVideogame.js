@@ -4,7 +4,7 @@ const createVideoGame = async (
   name,
   description,
   platforms,
-  image,
+  background_image,
   released,
   rating,
   genre
@@ -13,7 +13,7 @@ const createVideoGame = async (
     name,
     description,
     platforms,
-    image,
+    background_image,
     released,
     rating,
   });
@@ -23,8 +23,15 @@ const createVideoGame = async (
 };
 
 const postVideogame = async (req, res) => {
-  const { name, description, platforms, image, released, rating, genre } =
-    req.body;
+  const {
+    name,
+    description,
+    platforms,
+    background_image,
+    released,
+    rating,
+    genre,
+  } = req.body;
 
   const isValidGenre =
     Array.isArray(genre) && genre.every((element) => Number.isInteger(element));
@@ -39,7 +46,7 @@ const postVideogame = async (req, res) => {
       !name ||
       !description ||
       !platforms ||
-      !image ||
+      !background_image ||
       !released ||
       !rating ||
       !genre
@@ -50,7 +57,7 @@ const postVideogame = async (req, res) => {
       name,
       description,
       platforms,
-      image,
+      background_image,
       released,
       rating,
       genre

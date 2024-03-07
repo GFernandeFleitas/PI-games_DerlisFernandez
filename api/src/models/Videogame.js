@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     "videogame",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
 
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
-      image: {
+      background_image: {
         type: DataTypes.STRING,
         allowNull: false,
       },

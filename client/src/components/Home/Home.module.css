@@ -1,0 +1,31 @@
+.videogamesCardContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.navigationButtonPrevious,
+.navigationButtonNext {
+  width: 180px;
+  background-color: gold;
+  color: black;
+  margin: 10px;
+
+  height: 35px;
+  padding: 0px;
+}
+
+.navigationButtonNext:disabled {
+  background-color: slategray;
+  &::after {
+    content: "  🚫";
+  }
+}
+
+.navigationButtonPrevious:disabled {
+  background-color: slategray;
+  &::before {
+    content: "🚫  ";
+  }
+}

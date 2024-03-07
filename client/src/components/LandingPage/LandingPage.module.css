@@ -1,0 +1,26 @@
+.landingPageContainer {
+  margin: auto;
+  display: block;
+  width: 50%;
+  border: 1px solid red;
+}
+.controllerImage {
+  width: 50%;
+}
+
+.linkButtonContainer {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.allGamesButton {
+  background-color: #fbc32e;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  border-radius: 50rem;
+}
