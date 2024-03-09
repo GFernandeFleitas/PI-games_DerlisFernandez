@@ -7,6 +7,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Videogames from "./components/Videogames/Videogames";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import Home from "./components/Home/Home";
+import CreateVideogameForm from "./components/CreateVideoGameForm/CreateVideogameForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/videogames" element={<Videogames />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/home/create_videgame" element={<CreateVideogameForm />} />
       </Routes>
     </>
   ) : (

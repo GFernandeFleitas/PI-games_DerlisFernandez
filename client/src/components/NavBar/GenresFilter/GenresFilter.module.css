@@ -34,7 +34,7 @@
   padding: 0px;
 }
 
-.optionBox label:hover {
+.optionBox:hover label {
   color: gold;
 }
 

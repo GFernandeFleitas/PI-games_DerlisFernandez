@@ -11,6 +11,7 @@ import {
   resetVideogamesData,
 } from "../../store/actions";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
   const dispatch = useDispatch();
@@ -103,6 +104,11 @@ const NavBar = (props) => {
           currentFilter={currentFilter}
           setCurrentFilter={setCurrentFilter}
         />
+      </div>
+      <div className={style.sortingDataSelect}>
+        <Link to="/home/create_videgame">
+          <span className={style.createButton}>CREATE VIDEOGAME</span>
+        </Link>
       </div>
     </div>
   );

@@ -1,0 +1,64 @@
+form {
+  width: 500px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.formLabel {
+  width: 100%;
+  color: gold;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 5px;
+  text-align: left;
+}
+
+.formInputText,
+.formInputTextSearchList {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.formInputTextSearchList {
+  list-style-type: none;
+}
+.selectedPlatformOption {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  width: fit-content;
+  border: 1px solid black;
+  background-color: gold;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 5px;
+  color: black;
+}
+.eliminateSelectedPlatform {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  color: white;
+  padding: 3px;
+  width: 10px;
+  height: 13px;
+  margin-right: 5px;
+
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: rgb(234, 85, 85);
+}
+.eliminateSelectedPlatform:hover {
+  color: black;
+  border: 1px solid black;
+}
