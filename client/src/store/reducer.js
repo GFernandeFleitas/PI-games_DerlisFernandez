@@ -8,6 +8,7 @@ import {
   RESET_DATA,
   FILTER_BY_GENRE_ARRAY,
   CREATE_VIDEOGAME,
+  GET_VIDEOGAME_DETAIL,
 } from "./actions";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   allVideogames: [],
   searchedVideogames: [],
   allGenres: [],
+  videogameForDetailCard: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -38,6 +40,11 @@ const rootReducer = (state = initialState, action) => {
           ...state.originalData,
           dbvideogames: [...state.originalData.dbvideogames, action.payload],
         },
+      };
+    case GET_VIDEOGAME_DETAIL:
+      return {
+        ...state,
+        videogameForDetailCard: action.payload,
       };
     case RESET_DATA:
       return {

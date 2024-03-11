@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import style from "./VideogameCard.module.css";
+import { Link } from "react-router-dom";
 
 const VideogameCard = (props) => {
-  const { name, background_image, genres } = props.videogame;
+  const { id, name, background_image, genres } = props.videogame;
 
   return (
     <div className={style.cardContainer}>
@@ -23,6 +24,9 @@ const VideogameCard = (props) => {
           </div>
         </div>
       </div>
+      <Link to={`/home/detail_videogame/${id}`}>
+        <button className="Link">Details</button>
+      </Link>
     </div>
   );
 };

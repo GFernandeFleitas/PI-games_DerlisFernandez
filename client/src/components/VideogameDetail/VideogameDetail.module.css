@@ -1,0 +1,49 @@
+.detailMainContainer {
+  background-color: black;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.imageTage {
+  width: 60%;
+  height: auto;
+  object-fit: cover;
+}
+
+.title {
+  color: white;
+}
+.description p {
+  text-align: justify;
+  color: lightcyan;
+}
+.genreTag,
+.platformTag {
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid gold;
+  border-radius: 5px;
+  background-color: gold;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  font-size: 13px;
+}
+
+.ratingTag {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+
+  &::before {
+    padding: 3px;
+    content: "⭐";
+  }
+}
+
+.releaseDateTag {
+  font-weight: bold;
+}
