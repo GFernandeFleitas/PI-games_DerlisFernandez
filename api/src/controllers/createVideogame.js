@@ -1,4 +1,4 @@
-const { Videogame } = require("../db.js");
+const { Videogame, Genre } = require("../db.js");
 
 const createVideoGame = async (
   name,
@@ -7,7 +7,7 @@ const createVideoGame = async (
   background_image,
   released,
   rating,
-  genre
+  genres
 ) => {
   const newVideogame = await Videogame.create({
     name,
@@ -18,8 +18,30 @@ const createVideoGame = async (
     rating,
   });
 
-  await newVideogame.setGenres(genre);
-  return newVideogame;
+  await newVideogame.setGenres(genres);
+
+  const createdVideogame = await Videogame.findByPk(newVideogame.id, {
+    include: {
+      model: Genre,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+
+  let responseObject = {};
+
+  if (createdVideogame) {
+    console.log(createdVideogame.dataValues.genres);
+    let auxGenres = createdVideogame.dataValues.genres.map((g) => g.name);
+    responseObject = {
+      ...createdVideogame.dataValues,
+      genres: auxGenres,
+    };
+  }
+
+  return responseObject;
 };
 
 const postVideogame = async (req, res) => {
@@ -30,11 +52,12 @@ const postVideogame = async (req, res) => {
     background_image,
     released,
     rating,
-    genre,
+    genres,
   } = req.body;
 
   const isValidGenre =
-    Array.isArray(genre) && genre.every((element) => Number.isInteger(element));
+    Array.isArray(genres) &&
+    genres.every((element) => Number.isInteger(element));
   if (!isValidGenre) {
     return res
       .status(400)
@@ -49,7 +72,7 @@ const postVideogame = async (req, res) => {
       !background_image ||
       !released ||
       !rating ||
-      !genre
+      !genres
     )
       throw Error("Missing data");
 
@@ -60,7 +83,7 @@ const postVideogame = async (req, res) => {
       background_image,
       released,
       rating,
-      genre
+      genres
     );
 
     res.status(201).json(newVideoGame);

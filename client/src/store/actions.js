@@ -7,6 +7,7 @@ export const ORDER_DATA_ASC = "ORDER_DATA_ASC";
 export const ORDER_DATA_ASC_RATING = "ORDER_DATA_ASC_RATING";
 export const RESET_DATA = "RESET_DATA";
 export const FILTER_BY_GENRE_ARRAY = "FILTER_BY_GENRE_ARRAY";
+export const CREATE_VIDEOGAME = "CREATE_VIDEOGAME";
 
 export const getAllVideogames = () => {
   const endpoint = "http://localhost:3001/videogames";
@@ -22,6 +23,24 @@ export const getAllVideogames = () => {
       })
       .catch((error) => {
         console.error("Error fetching videogames:", error);
+      });
+  };
+};
+
+export const createVideogame = (formData) => {
+  const endpoint = "http://localhost:3001/videogames";
+  return (dispatch) => {
+    axios
+      .post(endpoint, formData)
+      .then(({ data }) => {
+        console.log(data);
+        return dispatch({
+          type: CREATE_VIDEOGAME,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.error("Error creating videogame:", error);
       });
   };
 };

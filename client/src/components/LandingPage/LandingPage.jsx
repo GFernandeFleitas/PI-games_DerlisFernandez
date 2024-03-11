@@ -10,7 +10,7 @@ const LandingPage = () => {
         src={controllerImage}
         alt="CONTROLLER IMAGE"
       />
-      <h3>BIENVENIDO A LA PÁGINA DE MI PROYECTO INDIVIDUAL</h3>
+      <h3>WELCOME TO MY VIDEOGAMES PROJECT</h3>
 
       <Link className={style.linkButtonContainer} to={"/home"}>
         <button className={style.allGamesButton}>HOME PAGE ▶️ </button>

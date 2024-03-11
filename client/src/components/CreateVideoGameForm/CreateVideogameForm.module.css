@@ -1,3 +1,10 @@
+.mainContainerForm {
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
+}
+
 form {
   width: 500px;
 }
@@ -27,17 +34,29 @@ form {
   font-size: 13px;
 }
 
+.selectedPlatformOptionEmpty {
+  display: none;
+}
+.selectedPlatfromsBox {
+  border-radius: 5px;
+  display: flex;
+  border: 1px solid white;
+  padding: 2px;
+}
+
 .formInputTextSearchList {
   list-style-type: none;
 }
 .selectedPlatformOption {
   display: flex;
   align-items: center;
+  margin: 2px;
+  font-size: 13px;
 
   justify-content: center;
   width: fit-content;
   border: 1px solid black;
-  background-color: gold;
+  background-color: goldenrod;
   font-weight: bold;
   padding: 3px;
   border-radius: 5px;
@@ -46,19 +65,88 @@ form {
 .eliminateSelectedPlatform {
   display: flex;
   align-items: center;
-  align-content: center;
+  /* align-content: center; */
   justify-content: center;
-  color: white;
-  padding: 3px;
-  width: 10px;
-  height: 13px;
-  margin-right: 5px;
 
-  border: 1px solid white;
+  color: white;
+  padding: 5px;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  font-size: 10px;
+
+  border: 1px solid slategray;
   border-radius: 5px;
   background-color: rgb(234, 85, 85);
 }
 .eliminateSelectedPlatform:hover {
   color: black;
   border: 1px solid black;
+}
+
+.foundPlatforms {
+  text-align: center;
+}
+
+.foundPlatforms:hover {
+  background-color: goldenrod;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+
+.genresBox {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 168px;
+  border-radius: 5px;
+}
+
+.optionBox {
+  width: fit-content;
+}
+
+.optionBox:hover label {
+  color: gold;
+}
+
+.errorMessage {
+  color: red;
+  font-size: small;
+  font-weight: bold;
+}
+
+.formRowSubmit {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.goBackHomeButton,
+.createGameButton {
+  width: 200px;
+}
+
+.goBackHomeButton {
+  background-color: gold;
+  color: black;
+}
+
+.createGameButton:disabled {
+  background-color: grey;
+  color: rgba(166, 166, 166, 0.637);
+}
+
+.createGameButton {
+  background-color: rgb(31, 251, 71);
+  color: black;
+}
+
+.succesAlert {
+  text-transform: uppercase;
+  font-size: small;
+  font-weight: bold;
+  color: rgb(31, 251, 71);
 }

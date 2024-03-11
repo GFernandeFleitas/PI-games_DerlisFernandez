@@ -7,6 +7,7 @@ import {
   GET_ALL_GENRES,
   RESET_DATA,
   FILTER_BY_GENRE_ARRAY,
+  CREATE_VIDEOGAME,
 } from "./actions";
 
 const initialState = {
@@ -25,6 +26,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allVideogames: action.payload,
         originalData: action.payload,
+      };
+    case CREATE_VIDEOGAME:
+      return {
+        ...state,
+        allVideogames: {
+          ...state.allVideogames,
+          dbvideogames: [...state.allVideogames.dbvideogames, action.payload],
+        },
+        originalData: {
+          ...state.originalData,
+          dbvideogames: [...state.originalData.dbvideogames, action.payload],
+        },
       };
     case RESET_DATA:
       return {
