@@ -10,17 +10,23 @@ const { Videogame, Genre } = require("../db.js");
 const searchGamesByName = async (req, res) => {
   const { name } = req.query;
   try {
+    if (!name) {
+      return res.status(200).json({ apigames: [], dbvideogames: [] });
+    }
     //get the first response from the API
     const response = await axios(
       `${ALL_VIDEOGAMES_ENDOPOINT}?search=${name}&key=${API_KEY}`
     );
 
-    if (!response.data.count)
-      return res.status(204).json(`Game: "${req.query.name}" NOT FOUND`);
+    // if (!response.data.count)
+    //   return res.status(204).json(`Game: "${req.query.name}" NOT FOUND`);
 
-    const gamesFound = response.data.results.map((videogame) => {
-      return cleanVideogameDataFromApi(videogame);
-    });
+    const gamesFound =
+      response.data.count === 0
+        ? []
+        : response.data.results.map((videogame) => {
+            return cleanVideogameDataFromApi(videogame);
+          });
 
     const dbVideogames = await Videogame.findAll({
       where: {
@@ -35,7 +41,7 @@ const searchGamesByName = async (req, res) => {
       return game.name.toLowerCase().includes(name.toLowerCase());
     });
 
-    return gamesFound.length && filteredDBgames.length >= 0
+    return gamesFound.length >= 0 && filteredDBgames.length >= 0
       ? res.status(200).json({
           apigames: [...gamesFound].slice(0, 15),
           dbvideogames: [...filteredDBgames].slice(0, 15),

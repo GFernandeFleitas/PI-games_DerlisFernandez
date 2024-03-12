@@ -1,0 +1,89 @@
+.navBarContainer {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  background-color: black;
+}
+.logoContainer {
+  max-height: 80px;
+  margin-left: 10px;
+  background-color: goldenrod;
+  border-top-left-radius: 15px;
+}
+
+.controllerLogo {
+  height: 60px;
+  object-fit: cover;
+}
+
+.titleContainer {
+  width: 120px;
+  padding: auto;
+}
+
+.titleContainer p {
+  margin: 0px;
+}
+
+.mainTitle {
+  font-weight: bold;
+}
+
+.filterDataOriginContainer,
+.sortingDataSelect,
+.searchBarContainer {
+  padding: auto;
+
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.navBarLabels {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.filterDataOriginContainer select,
+.sortingDataSelect select {
+  color: gold;
+  font-weight: bold;
+  height: 25px;
+}
+
+.sortingDataSelect span {
+  font-size: 14px;
+  font-weight: bold;
+}
+.searchBarContainer {
+  width: 40%;
+}
+.searchBar {
+  width: 100%;
+  color: gold;
+  font-weight: bold;
+  height: 20px;
+  padding-left: 10px;
+}
+
+.searchButton {
+  height: 22px;
+  padding: 0px;
+  font-size: 14px;
+  margin-left: 10px;
+  border: 1px solid gold;
+  width: 100px;
+  border-radius: 5px;
+  padding: auto;
+  font-weight: bold;
+}

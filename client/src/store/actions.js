@@ -9,6 +9,7 @@ export const RESET_DATA = "RESET_DATA";
 export const FILTER_BY_GENRE_ARRAY = "FILTER_BY_GENRE_ARRAY";
 export const CREATE_VIDEOGAME = "CREATE_VIDEOGAME";
 export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
+export const SEARCH_GAMES = "SEARCH_GAMES";
 
 export const getAllVideogames = () => {
   const endpoint = "http://localhost:3001/videogames";
@@ -60,6 +61,24 @@ export const getVieogameDetailById = (idVideogame) => {
       })
       .catch((error) => {
         console.error("Error fetching videogame details:", error);
+      });
+  };
+};
+
+export const searchGamesByName = (videogameName) => {
+  const endpoint = `http://localhost:3001/videogames/name?name=${videogameName}`;
+  return (dispatch) => {
+    axios
+      .get(endpoint)
+      .then(({ data }) => {
+        console.log(data);
+        return dispatch({
+          type: SEARCH_GAMES,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching videogame info:", error);
       });
   };
 };

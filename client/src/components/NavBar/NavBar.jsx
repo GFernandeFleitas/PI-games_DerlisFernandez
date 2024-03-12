@@ -110,6 +110,12 @@ const NavBar = (props) => {
           <span className={style.createButton}>CREATE VIDEOGAME</span>
         </Link>
       </div>
+
+      <div className={style.sortingDataSelect}>
+        <Link to="/home/search_videogames">
+          <span className={style.createButton}>SEARCH 🔍</span>
+        </Link>
+      </div>
     </div>
   );
 };

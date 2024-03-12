@@ -9,13 +9,15 @@ import {
   FILTER_BY_GENRE_ARRAY,
   CREATE_VIDEOGAME,
   GET_VIDEOGAME_DETAIL,
+  SEARCH_GAMES,
 } from "./actions";
 
 const initialState = {
   originalData: [],
   allVideogames: [],
-  searchedVideogames: [],
+  searchedVideogames: { apigames: [], dbvideogames: [] },
   allGenres: [],
+  orderedData: [],
   videogameForDetailCard: {},
 };
 
@@ -28,6 +30,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allVideogames: action.payload,
         originalData: action.payload,
+      };
+    case SEARCH_GAMES:
+      return {
+        ...state,
+        searchedVideogames: action.payload,
       };
     case CREATE_VIDEOGAME:
       return {
@@ -60,6 +67,15 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_DATA_ASC:
       return {
         ...state,
+        orderedData: {
+          ...state.allVideogames,
+          apigames: [...state.allVideogames.apigames].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          ),
+          dbvideogames: [...state.allVideogames.dbvideogames].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          ),
+        },
         allVideogames: {
           ...state.allVideogames,
           apigames: [...state.allVideogames.apigames].sort((a, b) =>
@@ -73,6 +89,15 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_DATA_DES_RATING:
       return {
         ...state,
+        orderedData: {
+          ...state.allVideogames,
+          apigames: [...state.allVideogames.apigames].sort(
+            (a, b) => b.rating - a.rating
+          ),
+          dbvideogames: [...state.allVideogames.dbvideogames].sort(
+            (a, b) => b.rating - a.rating
+          ),
+        },
         allVideogames: {
           ...state.allVideogames,
           apigames: [...state.allVideogames.apigames].sort(
@@ -87,6 +112,16 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_DATA_DES:
       return {
         ...state,
+        orderedData: {
+          ...state.allVideogames,
+          apigames: [...state.allVideogames.apigames].sort((a, b) =>
+            b.name.localeCompare(a.name)
+          ),
+          dbvideogames: [...state.allVideogames.dbvideogames].sort((a, b) =>
+            b.name.localeCompare(a.name)
+          ),
+        },
+
         allVideogames: {
           ...state.allVideogames,
           apigames: [...state.allVideogames.apigames].sort((a, b) =>
@@ -101,6 +136,15 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_DATA_ASC_RATING:
       return {
         ...state,
+        orderedData: {
+          ...state.allVideogames,
+          apigames: [...state.allVideogames.apigames].sort(
+            (a, b) => a.rating - b.rating
+          ),
+          dbvideogames: [...state.allVideogames.dbvideogames].sort(
+            (a, b) => a.rating - b.rating
+          ),
+        },
         allVideogames: {
           ...state.allVideogames,
           apigames: [...state.allVideogames.apigames].sort(
@@ -118,10 +162,10 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           allVideogames: {
             ...state.allVideogames,
-            apigames: [...state.originalData.apigames].filter((videogame) =>
+            apigames: [...state.orderedData.apigames].filter((videogame) =>
               videogame.genres.some((genre) => action.payload.includes(genre))
             ),
-            dbvideogames: [...state.originalData.dbvideogames].filter(
+            dbvideogames: [...state.orderedData.dbvideogames].filter(
               (videogame) =>
                 videogame.genres.some((genre) => action.payload.includes(genre))
             ),

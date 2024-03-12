@@ -21,12 +21,15 @@ const VideogameCard = (props) => {
             {genres.map((g, index) => (
               <span key={index + 1}>{g} </span>
             ))}
+            <Link
+              className={style.linkToTheDetail}
+              to={`/home/detail_videogame/${id}`}
+            >
+              <button className={style.detailButton}>Details</button>
+            </Link>
           </div>
         </div>
       </div>
-      <Link to={`/home/detail_videogame/${id}`}>
-        <button className="Link">Details</button>
-      </Link>
     </div>
   );
 };

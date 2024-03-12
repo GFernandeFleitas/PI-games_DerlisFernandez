@@ -14,11 +14,13 @@ const cleanVideogameDataFromApi = (videogameObject) => {
     id,
     name,
     description,
-    platforms: platforms.map((platform) => platform.platform.name),
+    platforms: !platforms
+      ? []
+      : platforms.map((platform) => platform.platform.name),
     background_image,
     rating,
     released,
-    genres: genres.map((genre) => genre.name),
+    genres: !genres ? [] : genres.map((genre) => genre.name),
   };
 };
 
