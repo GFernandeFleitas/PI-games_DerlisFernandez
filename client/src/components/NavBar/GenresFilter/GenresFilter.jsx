@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import style from "./GenresFilter.module.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -5,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { filterByGenreId } from "../../../store/actions";
 
 const GenresFilter = (props) => {
-  const { currentFilter, setCurrentFilter } = props;
+  const { currentFilter, setCurrentFilter, setCurrentPage } = props;
 
   const dispatch = useDispatch();
   const allGenres = useSelector((state) => state.allGenres);
@@ -32,6 +33,7 @@ const GenresFilter = (props) => {
         setCurrentFilter("NONE");
       }
     }
+    setCurrentPage(1);
   };
 
   return (

@@ -1,10 +1,19 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 import VideogameCard from "../VideogameCard/VideogameCard";
 import NavBar from "../NavBar/NavBar";
+import { searchGamesByName } from "../../store/actions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      // Anything in here is fired on component unmount.
+      dispatch(searchGamesByName(""));
+    };
+  }, []);
   const allVideogames = useSelector((state) => state.allVideogames);
 
   const numberOfGamesPerPage = 15;

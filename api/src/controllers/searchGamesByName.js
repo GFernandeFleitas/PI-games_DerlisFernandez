@@ -34,17 +34,35 @@ const searchGamesByName = async (req, res) => {
           [Op.iLike]: `%${name}%`,
         },
       },
+
+      include: {
+        model: Genre,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+
       limit: 15,
     });
 
-    const filteredDBgames = dbVideogames.filter((game) => {
-      return game.name.toLowerCase().includes(name.toLowerCase());
+    let responseDbVideogames = [];
+
+    dbVideogames.map((game) => {
+      responseDbVideogames.push({
+        ...game.toJSON(),
+        genres: game.genres.map((g) => g.name),
+      });
     });
 
-    return gamesFound.length >= 0 && filteredDBgames.length >= 0
+    // const filteredDBgames = dbVideogames.filter((game) => {
+    //   return game.name.toLowerCase().includes(name.toLowerCase());
+    // });
+
+    return gamesFound.length >= 0 && responseDbVideogames.length >= 0
       ? res.status(200).json({
           apigames: [...gamesFound].slice(0, 15),
-          dbvideogames: [...filteredDBgames].slice(0, 15),
+          dbvideogames: [...responseDbVideogames].slice(0, 15),
         })
       : res.status(404).send("Not Found");
   } catch (error) {

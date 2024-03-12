@@ -58,6 +58,7 @@ const postVideogame = async (req, res) => {
   const isValidGenre =
     Array.isArray(genres) &&
     genres.every((element) => Number.isInteger(element));
+
   if (!isValidGenre) {
     return res
       .status(400)

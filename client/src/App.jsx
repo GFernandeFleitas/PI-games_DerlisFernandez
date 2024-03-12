@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import CreateVideogameForm from "./components/CreateVideoGameForm/CreateVideogameForm";
 import VideogameDetail from "./components/VideogameDetail/VideogameDetail";
 import SearchGames from "./components/SearchGame/SearchGames.jsx";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/home/create_videgame" element={<CreateVideogameForm />} />
         <Route path="/home/search_videogames" element={<SearchGames />} />
+        <Route path="*" element={<NotFoundPage />} />
         <Route
           path="/home/detail_videogame/:idVideogame"
           element={<VideogameDetail />}

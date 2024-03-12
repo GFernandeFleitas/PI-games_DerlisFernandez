@@ -393,6 +393,7 @@ const CreateVideogameForm = () => {
             autoComplete="off"
             value={formData.rating}
             onChange={hadleDirectSimpleEdition}
+            step=".01"
           />
           <span className={style.errorMessage}>{errors.rating}</span>
         </div>

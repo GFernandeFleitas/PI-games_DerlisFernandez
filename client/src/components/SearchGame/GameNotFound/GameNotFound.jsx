@@ -1,7 +1,10 @@
+import gameNotFoundImage from "/not_content.png";
+
 const GameNotFound = () => {
   return (
     <div>
-      <h5>GAME NOT FOUND</h5>
+      <img style={{ width: "30%" }} src={gameNotFoundImage} alt="" />
+      <h2>ERROR: NOT GAME CONTENT FOUND</h2>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getVieogameDetailById } from "../../store/actions";
 import { useEffect } from "react";
 import style from "./VideogameDetail.module.css";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 const VideogameDetail = (props) => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const VideogameDetail = (props) => {
       <span className={style.releaseDateTag}>{released}</span>
     </div>
   ) : (
-    <>Loading</>
+    <LoadingPage />
   );
 };
 

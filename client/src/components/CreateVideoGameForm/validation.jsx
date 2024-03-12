@@ -73,11 +73,11 @@ const validation = (formData, errors, setErrors) => {
 
   if (!formData.rating) {
     allValidationErrors.rating = "The rating for the game is required";
-  } else if (!/^[1-5]$/.test(formData.rating)) {
-    allValidationErrors.rating =
-      "The rating for the game must be a number between 1 and 5";
-  } else {
+  } else if (Number(formData.rating) >= 0.1 && Number(formData.rating) <= 5.0) {
     allValidationErrors.rating = "";
+  } else {
+    allValidationErrors.rating =
+      "The rating for the game must be a number between 0.1 and 5.0";
   }
 
   //Validating Genra Selection

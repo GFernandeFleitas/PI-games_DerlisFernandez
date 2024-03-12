@@ -103,6 +103,7 @@ const NavBar = (props) => {
         <GenresFilter
           currentFilter={currentFilter}
           setCurrentFilter={setCurrentFilter}
+          setCurrentPage={setCurrentPage}
         />
       </div>
       <div className={style.sortingDataSelect}>
@@ -113,7 +114,7 @@ const NavBar = (props) => {
 
       <div className={style.sortingDataSelect}>
         <Link to="/home/search_videogames">
-          <span className={style.createButton}>SEARCH 🔍</span>
+          <span className={style.createButton}>SEARCH GAMES 🔍</span>
         </Link>
       </div>
     </div>

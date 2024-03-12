@@ -13,13 +13,6 @@ const SearchBar = (props) => {
   const { setUserUsedSearch } = props;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      // Anything in here is fired on component unmount.
-      dispatch(searchGamesByName(""));
-    };
-  }, []);
-
   const { setDataOrigin, setCurrentPage } = props;
   // const [currentFilter, setCurrentFilter] = useState("NONE");]
   const [searchWord, setSearchWord] = useState("");
