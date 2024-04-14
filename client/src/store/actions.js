@@ -12,25 +12,20 @@ export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
 export const SEARCH_GAMES = "SEARCH_GAMES";
 
 export const getAllVideogames = () => {
-  const endpoint = "http://localhost:3001/videogames";
+  const endpoint = "https://pi-games-derlisfernandez.onrender.com/videogames";
+
   return (dispatch) => {
-    axios
-      .get(endpoint)
-      .then(({ data }) => {
-        console.log(data);
-        return dispatch({
-          type: GET_ALL_VIDEOGAMES,
-          payload: data,
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching videogames:", error);
+    axios.get(endpoint).then(({ data }) => {
+      return dispatch({
+        type: GET_ALL_VIDEOGAMES,
+        payload: data,
       });
+    });
   };
 };
 
 export const createVideogame = (formData) => {
-  const endpoint = "http://localhost:3001/videogames";
+  const endpoint = "https://pi-games-derlisfernandez.onrender.com/videogames";
   return (dispatch) => {
     axios
       .post(endpoint, formData)
@@ -48,7 +43,7 @@ export const createVideogame = (formData) => {
 };
 
 export const getVieogameDetailById = (idVideogame) => {
-  const endpoint = `http://localhost:3001/videogames/${idVideogame}`;
+  const endpoint = `https://pi-games-derlisfernandez.onrender.com/videogames/${idVideogame}`;
   return (dispatch) => {
     axios
       .get(endpoint)
@@ -66,7 +61,7 @@ export const getVieogameDetailById = (idVideogame) => {
 };
 
 export const searchGamesByName = (videogameName) => {
-  const endpoint = `http://localhost:3001/videogames/name?name=${videogameName}`;
+  const endpoint = `https://pi-games-derlisfernandez.onrender.com/name?name=${videogameName}`;
   return (dispatch) => {
     axios
       .get(endpoint)
@@ -84,7 +79,7 @@ export const searchGamesByName = (videogameName) => {
 };
 
 export const getAllGenres = () => {
-  const endpoint = "http://localhost:3001/genres";
+  const endpoint = "https://pi-games-derlisfernandez.onrender.com/genres";
   return (dispatch) => {
     axios
       .get(endpoint)
